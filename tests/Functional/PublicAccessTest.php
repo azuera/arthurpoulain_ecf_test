@@ -10,7 +10,7 @@ class PublicAccessTest extends WebTestCase
     {
         $client = static::createClient();
 
-        // Test d'accès à la liste des livres (route publique)
+
         $client->request('GET', '/book');
 
         $this->assertResponseStatusCodeSame(200);
@@ -20,7 +20,7 @@ class PublicAccessTest extends WebTestCase
     {
         $client = static::createClient();
 
-        // Test d'accès à la page d'accueil
+
         $client->request('GET', '/');
 
         $this->assertResponseStatusCodeSame(200);

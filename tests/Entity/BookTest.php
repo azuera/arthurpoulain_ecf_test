@@ -14,7 +14,6 @@ class BookTest extends TestCase
     {
         $book = new Book();
 
-        // Test des getters/setters basiques
         $book->setTitle('Le Petit Prince');
         $book->setIsbn('9782070612758');
         $book->setCover('https://example.com/cover.jpg');
@@ -36,14 +35,11 @@ class BookTest extends TestCase
     {
         $book = new Book();
 
-        // Un nouveau livre n'a pas d'ID (généré par la base de données)
         $this->assertNull($book->getId());
 
-        // Les collections sont initialisées
         $this->assertCount(0, $book->getAuthors());
         $this->assertCount(0, $book->getComments());
 
-        // Pas d'éditeur par défaut
         $this->assertNull($book->getEditor());
     }
 
@@ -52,17 +48,13 @@ class BookTest extends TestCase
         $book = new Book();
         $author = new Author();
 
-        // Associer l'auteur au livre
         $book->addAuthor($author);
 
-        // Vérifier que l'auteur est bien associé
         $this->assertCount(1, $book->getAuthors());
         $this->assertTrue($book->getAuthors()->contains($author));
 
-        // Vérifier que le livre est bien associé à l'auteur (relation bidirectionnelle)
         $this->assertTrue($author->getBooks()->contains($book));
 
-        // Retirer l'association
         $book->removeAuthor($author);
 
         $this->assertCount(0, $book->getAuthors());
@@ -74,13 +66,10 @@ class BookTest extends TestCase
         $book = new Book();
         $editor = new Editor();
 
-        // Associer l'éditeur au livre
         $book->setEditor($editor);
 
-        // Vérifier que l'éditeur est bien associé
         $this->assertSame($editor, $book->getEditor());
 
-        // Vérifier que le livre est bien associé à l'éditeur (relation bidirectionnelle)
         $editor->addBook($book);
         $this->assertTrue($editor->getBooks()->contains($book));
     }
